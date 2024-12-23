@@ -80,10 +80,10 @@ in
             enableACME = true; # No certificate provided. One will be generated.
             locations."/" = {
                 proxyPass = "http://127.0.0.1:19999";
-                basicAuth = {
-                    realm = "Netdata Access";
-                    file = "/var/lib/netdata/htpasswd";
-                };
+                # basicAuth = {
+                #     realm = "Netdata Access";
+                #     file = "/var/lib/netdata/htpasswd";
+                # };
             };
         };
     };
