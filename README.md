@@ -32,8 +32,17 @@ This guide outlines the steps to set up NixOS on an Ampere instance in Oracle Cl
     * `REMOTE_USER` - The username provided by Oracle after instance creation. If `Oracle Linux` is used, it should be `opc`.
     * `REMOTE_HOST` - The public IP of the instance. can be copied from the instance's GUI.
     * `SSH_KEY` - The path to your `private` SSH key.
-- Make the bash script executable: `chmod +x initial_setup.sh`
-- Run the script: `./initial_setup.sh`
+- Make the bash script executable:
+
+```bash
+chmod +x initial_setup.sh
+```
+
+- Run the script:
+
+```bash
+./initial_setup.sh
+```
 
 **This script will attempt to:**
 - Log into the instance as `REMOTE_USER`, using the provided `SSH_KEY`.
@@ -47,7 +56,11 @@ This guide outlines the steps to set up NixOS on an Ampere instance in Oracle Cl
 
 ### Step 3: Verify NixOS Installation
 
-- After the installation completes, you can SSH into the machine your user (the one that contains your key in `openssh.authorizedKeys.keys` option in `ampere-config/configuration.nix`): `TERM=xterm-256color ssh <user>@<public_ip>`
+- After the installation completes, you can SSH into the machine your user (the one that contains your key in `openssh.authorizedKeys.keys` option in `ampere-config/configuration.nix`).
+
+``` bash
+TERM=xterm-256color ssh <user>@<public_ip>
+```
 
 > [!NOTE]
 > Change `<user>` and `<public_ip>` placeholders to match your username and the instance's public IP.
