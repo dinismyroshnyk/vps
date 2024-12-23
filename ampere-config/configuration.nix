@@ -1,7 +1,7 @@
 { modulesPath, lib, pkgs, ... }:
 let
     NETDATA_USERNAME= "netdata";                    # Username for Netdata
-    NETDATA_PASSWORD= "netdata_password";      # Password for Netdata
+    NETDATA_PASSWORD= "netdata_password";           # Password for Netdata
     # DOMAIN_NAME = "your_domain_name.com";         # Domain Name (Uncomment when available)
     EMAIL_ADDRESS = "your_email@example.com";       # Email for ACME
 in
