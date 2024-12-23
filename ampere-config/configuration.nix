@@ -48,6 +48,7 @@ in
         users.netdata-htpasswd-user = {
             isSystemUser = true;
             createHome = false;
+            group = "netdata-htpasswd-user";
         };
         groups.netdata-htpasswd-user = {};
     };
