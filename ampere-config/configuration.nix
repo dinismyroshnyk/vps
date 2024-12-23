@@ -1,8 +1,13 @@
-{ modulesPath, ... }: # Add 'pkgs' if 'environment.systemPackages' is used
+{ modulesPath, lib, pkgs, ... }:
 {
     imports = [
         (modulesPath + "/profiles/qemu-guest.nix")
         ../disk-config.nix
+    ];
+
+    # Allow unfree packages.
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "netdata"
     ];
 
     # Bootloader.
@@ -23,6 +28,9 @@
     # Netdata.
     services.netdata = {
         enable = true;
+        package = pkgs.netdata.override {
+            withCloudUi = true;
+        };
         config = {
             web = {
                 mode = "static-threaded";
