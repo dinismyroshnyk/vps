@@ -39,14 +39,14 @@
         };
     };
 
-    # Nginx.
-    # services.nginx = {
-    #     enable = true;
-    #     virtualHosts."_" = {
-    #         forceSSL = true;
-    #         locations."/".proxyPass = "http://127.0.0.1:19999";
-    #     };
-    # };
+    Nginx.
+    services.nginx = {
+        enable = true;
+        # virtualHosts."_" = {
+        #     forceSSL = true;
+        #     locations."/".proxyPass = "http://127.0.0.1:19999";
+        # };
+    };
 
     # System packages.
     environment.systemPackages = with pkgs; [
