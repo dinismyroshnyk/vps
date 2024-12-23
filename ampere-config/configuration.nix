@@ -44,9 +44,12 @@ in
         };
     };
 
-    users.users.netdata-htpasswd-user = {
-        isSystemUser = true;
-        createHome = false;
+    users = {
+        users.netdata-htpasswd-user = {
+            isSystemUser = true;
+            createHome = false;
+        };
+        groups.netdata-htpasswd-group = {};
     };
 
     systemd.services.generate-htpasswd = {
