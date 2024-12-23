@@ -60,7 +60,6 @@ in
                 ${pkgs.apacheHttpd}/bin/htpasswd -c -b /var/lib/netdata/htpasswd admin ${NETDATA_PASSWORD}
             '';
         };
-        startAtBoot = true;
     };
 
     # Nginx.
