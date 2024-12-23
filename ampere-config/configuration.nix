@@ -39,9 +39,19 @@
         };
     };
 
-    # environment.systemPackages = with pkgs; [
-    #     git
-    # ];
+    # Nginx.
+    services.nginx = {
+        enable = true;
+        virtualHosts."_" = {
+            forceSSL = true;
+            locations."/".proxyPass = "http://127.0.0.1:19999";
+        };
+    };
+
+    # System packages.
+    environment.systemPackages = with pkgs; [
+        apacheHttpd
+    ];
 
     # Enabled programs.
     programs = {
@@ -85,5 +95,5 @@
     nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
     # System state version.
-    system.stateVersion = "unstable";
+    system.stateVersion = "24.11";
 }

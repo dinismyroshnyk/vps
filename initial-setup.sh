@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Configurable variables
-REMOTE_USER="opc"                           # Username provided by Oracle after instance creation
-REMOTE_HOST="130.61.74.203"                       # Public IP of the instance
-SSH_KEY="/home/dinis/.ssh/id_ed25519"        # Path to your private SSH key
+REMOTE_USER="opc"                                   # Username provided by Oracle after instance creation
+REMOTE_HOST="0.0.0.0"                               # Public IP of the instance
+SSH_KEY="/home/user/.ssh/your_private_key"          # Path to your private SSH key
 
 
 # Fixed variables - installation procedure
