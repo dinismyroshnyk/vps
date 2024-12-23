@@ -76,8 +76,8 @@ in
     services.nginx = {
         enable = true;
         virtualHosts."netdata-proxy" = {
-            # forceSSL = true;
-            # enableACME = true; # No certificate provided. One will be generated.
+            forceSSL = true;
+            enableACME = true; # No certificate provided. One will be generated.
             locations."/" = {
                 proxyPass = "http://127.0.0.1:19999";
                 basicAuth = {
