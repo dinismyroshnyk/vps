@@ -1,9 +1,8 @@
 { modulesPath, lib, pkgs, ... }:
 let
     NETDATA_PASSWORD="your_netdata_password";       # Password for Netdata
-    VPS_IP="130.61.74.203";                         # Public IP Address
     # DOMAIN_NAME = "your_domain_name.com";         # Domain Name (Uncomment when available)
-    # EMAIL_ADDRESS = "your_email@example.com";     # Email for ACME (Uncomment when available)
+    EMAIL_ADDRESS = "your_email@example.com";       # Email for ACME
 in
 {
     imports = [
@@ -45,19 +44,6 @@ in
         };
     };
 
-    # Generate Self-Signed Certificate
-    security.pki.certificateAuthority.default = {
-        keyType = "rsa";
-        keySize = 4096;
-    };
-
-    security.pki.certificate."netdata-selfsigned" = {
-        isCA = false;
-        signingCA = "default";
-        subject.commonName = VPS_IP;
-        subjectAlternativeNames = ["IP:${VPS_IP}"];
-    };
-
     users.users.netdata-htpasswd-user = {
         isSystemUser = true;
         createHome = false;
@@ -82,9 +68,7 @@ in
         enable = true;
         virtualHosts."netdata-proxy" = {
             forceSSL = true;
-            enableACME = false; # ACME disabled for now as the client has no domain
-            sslCertificate = "/var/lib/security/pki/certificate/netdata-selfsigned.pem";
-            sslCertificateKey = "/var/lib/security/pki/certificate/netdata-selfsigned.key";
+            enableACME = true; # No certificate provided. One will be generated.
             locations."/" = {
                 proxyPass = "http://127.0.0.1:19999";
                 basicAuth = {
@@ -95,11 +79,11 @@ in
         };
     };
 
-    # ACME Configuration (Commented out for now as the client has no domain)
-    # security.acme = {
-    #     acceptTerms = true;
-    #     email = EMAIL_ADDRESS;
-    # };
+    # ACME Configuration (No certificate provided. One will be generated.)
+    security.acme = {
+        acceptTerms = true;
+        email = EMAIL_ADDRESS;
+    };
 
     # System packages.
     environment.systemPackages = with pkgs; [
