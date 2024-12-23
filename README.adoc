@@ -1,3 +1,5 @@
+:icons: font
+
 = Setting Up NixOS on an Oracle Cloud Ampere Instance
 
 This guide outlines the steps to set up NixOS on an Ampere instance in Oracle Cloud Infrastructure (OCI). The process begins with configuring an Oracle Linux instance and concludes with replacing it with NixOS using `nixos-anywhere`.
@@ -54,9 +56,9 @@ Change `<user>` and `<public_ip>` placeholders to match your username and the in
 
 == References and Acknowledgements
 
--  https://github.com/nix-community/nixos-anywhere[NixOS Anywhere]
--  https://github.com/nix-community/disko[Disko]
--  https://www.youtube.com/watch?v=4sypfTBuEbA&t=197s[Vimjoyer's youtube guide]
--  https://github.com/nix-community/nixos-anywhere-examples[Mic92's example repo]
--  https://joegold.in/blog/posts/08-21-2024-nixos-dev-env/[joegoldin's blog post]
+- https://github.com/nix-community/nixos-anywhere[NixOS Anywhere]
+- https://github.com/nix-community/disko[Disko]
+- https://www.youtube.com/watch?v=4sypfTBuEbA&t=197s[Vimjoyer's youtube guide]
+- https://github.com/nix-community/nixos-anywhere-examples[Mic92's example repo]
+- https://joegold.in/blog/posts/08-21-2024-nixos-dev-env/[joegoldin's blog post]
 - https://medium.com/@moniruzzamanshimul/how-to-create-a-new-user-and-configure-both-key-based-and-password-based-authentication-on-oracle-765643644249[Moniruzzaman Shimul's Medium article]
