@@ -49,7 +49,7 @@ in
             isSystemUser = true;
             createHome = false;
         };
-        groups.netdata-htpasswd-group = {};
+        groups.netdata-htpasswd-user = {};
     };
 
     systemd.services.generate-htpasswd = {
