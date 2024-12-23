@@ -85,7 +85,7 @@ in
     # ACME Configuration (No certificate provided. One will be generated.)
     security.acme = {
         acceptTerms = true;
-        email = EMAIL_ADDRESS;
+        defaults.email = EMAIL_ADDRESS;
     };
 
     # System packages.
