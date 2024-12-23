@@ -42,10 +42,10 @@
     Nginx.
     services.nginx = {
         enable = true;
-        # virtualHosts."_" = {
-        #     forceSSL = true;
-        #     locations."/".proxyPass = "http://127.0.0.1:19999";
-        # };
+        virtualHosts."_" = {
+            # forceSSL = true;
+            locations."/".proxyPass = "http://127.0.0.1:19999";
+        };
     };
 
     # System packages.
