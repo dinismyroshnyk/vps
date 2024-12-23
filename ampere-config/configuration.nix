@@ -2,7 +2,7 @@
 let
     NETDATA_PASSWORD="your_netdata_password";       # Password for Netdata
     # DOMAIN_NAME = "your_domain_name.com";         # Domain Name (Uncomment when available)
-    EMAIL_ADDRESS = "your_email@example.com";       # Email for ACME
+    EMAIL_ADDRESS = "dinismyroshnyk2@protonmail.com";       # Email for ACME
 in
 {
     imports = [
@@ -53,16 +53,21 @@ in
         groups.netdata-htpasswd-user = {};
     };
 
-    systemd.services.generate-htpasswd = {
-        description = "Generate htpasswd file";
-        wantedBy = [ "multi-user.target" ];
-        serviceConfig = {
-            Type = "oneshot";
-            User = "netdata-htpasswd-user";
-            RemainAfterExit = true;
-            ExecStart = ''
-                ${pkgs.apacheHttpd}/bin/htpasswd -c -b /var/lib/netdata/htpasswd admin ${NETDATA_PASSWORD}
-            '';
+    systemd = {
+        tmpfiles.rules = [
+            "d /var/lib/netdata 0755 netdata-htpasswd-user netdata-htpasswd-user -"
+        ];
+        services.generate-htpasswd = {
+            description = "Generate htpasswd file";
+            wantedBy = [ "multi-user.target" ];
+            serviceConfig = {
+                Type = "oneshot";
+                User = "netdata-htpasswd-user";
+                RemainAfterExit = true;
+                ExecStart = ''
+                    ${pkgs.apacheHttpd}/bin/htpasswd -c -b /var/lib/netdata/htpasswd admin ${NETDATA_PASSWORD}
+                '';
+            };
         };
     };
 
