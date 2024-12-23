@@ -20,6 +20,17 @@
         };
     };
 
+    # Netdata.
+    services.netdata = {
+        enable = true;
+        config = {
+            web = {
+                mode = "static-threaded";
+                bind_to = "0.0.0.0";
+            };
+        };
+    };
+
     # environment.systemPackages = with pkgs; [
     #     git
     # ];
@@ -34,7 +45,10 @@
         };
     };
 
-    # Remove sudo password requirement for specified users.
+    # Firewall settings.
+    networking.firewall.allowedTCPPorts = [ 19999 ];
+
+    # Remove sudo password requirement for specified users. Currently not working.
     security.sudo.extraRules = [{
         users = [ "dinis" "ricol" ];
         commands =  [ { command = "/home/root/secret.sh"; options = [ "SETENV" "NOPASSWD" ]; } ];
