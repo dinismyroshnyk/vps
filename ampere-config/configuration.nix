@@ -39,7 +39,7 @@
         };
     };
 
-    Nginx.
+    # Nginx.
     services.nginx = {
         enable = true;
         virtualHosts."_" = {
