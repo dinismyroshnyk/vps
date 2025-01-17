@@ -44,9 +44,9 @@ jobs:
                         # Backup current generation
                         nix-env --backup-all --profile /nix/var/nix/profiles/system
                         # Test build first
-                        nixos-rebuild build --flake .#ampere-config
+                        nixos-rebuild --fast build --flake .#ampere-config
                         if [ $? -eq 0 ]; then
-                            nixos-rebuild switch --flake .#ampere-config
+                            nixos-rebuild --fast switch --flake .#ampere-config
                         else
                             echo "Build failed! Not applying changes."
                             exit 1
