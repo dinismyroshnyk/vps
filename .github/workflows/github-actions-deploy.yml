@@ -22,7 +22,6 @@ jobs:
                     script: |
                         rm -rf /build/*
                         mkdir -p /build
-                        chown $USER:$USER /build
 
             -   name: "Deploy NixOS configuration to remote"
                 uses: appleboy/scp-action@v0.1.7
@@ -45,9 +44,9 @@ jobs:
                         # Backup current generation
                         nix-env --backup-all --profile /nix/var/nix/profiles/system
                         # Test build first
-                        nixos-rebuild --fast build --flake .#ampere-config
+                        sudo nixos-rebuild --impure --fast build --flake .#ampere-config
                         if [ $? -eq 0 ]; then
-                            nixos-rebuild --fast switch --flake .#ampere-config
+                            sudo nixos-rebuild --impure --fast build --flake .#ampere-config
                         else
                             echo "Build failed! Not applying changes."
                             exit 1
