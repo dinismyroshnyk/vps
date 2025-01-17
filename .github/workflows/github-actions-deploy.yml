@@ -41,12 +41,11 @@ jobs:
                     key: ${{ secrets.SSH_KEY }}
                     script: |
                         cd /build
-                        # Backup current generation
-                        nix-env --backup-all --profile /nix/var/nix/profiles/system
                         # Test build first
-                        sudo nixos-rebuild --impure --fast build --flake .#ampere-config
+                        rm -rf .git
+                        sudo nixos-rebuild --fast build --flake .#ampere-config
                         if [ $? -eq 0 ]; then
-                            sudo nixos-rebuild --impure --fast build --flake .#ampere-config
+                            sudo nixos-rebuild --fast build --flake .#ampere-config
                         else
                             echo "Build failed! Not applying changes."
                             exit 1
