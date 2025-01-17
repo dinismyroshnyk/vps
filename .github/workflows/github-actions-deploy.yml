@@ -33,6 +33,8 @@ jobs:
                     target: "/build"
                     timeout: 60s
 
+            # Removed .git folder to prevent Nix from treating the build directory as a git repository
+            # This fixes the error: "repository path '/build' is not owned by current user"
             -   name: "Validate and apply NixOS configuration"
                 uses: appleboy/ssh-action@v1.2.0
                 with:
@@ -45,7 +47,7 @@ jobs:
                         rm -rf .git
                         sudo nixos-rebuild --fast build --flake .#ampere-config
                         if [ $? -eq 0 ]; then
-                            sudo nixos-rebuild --fast build --flake .#ampere-config
+                            sudo nixos-rebuild --fast switch --flake .#ampere-config
                         else
                             echo "Build failed! Not applying changes."
                             exit 1
