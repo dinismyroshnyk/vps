@@ -47,9 +47,9 @@ jobs:
                         cd /build
                         # Test build first
                         rm -rf .git
-                        sudo nixos-rebuild --fast build --flake .#ampere-config
+                        sudo nixos-rebuild build --flake .#ampere-config
                         if [ $? -eq 0 ]; then
-                            sudo nixos-rebuild --fast switch --flake .#ampere-config || true
+                            sudo nixos-rebuild switch --flake .#ampere-config || true
                         else
                             echo "Build failed! Not applying changes."
                             exit 1
