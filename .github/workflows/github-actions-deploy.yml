@@ -24,7 +24,7 @@ jobs:
                         mkdir -p /build
 
             -   name: "Deploy NixOS configuration to remote"
-                uses: appleboy/scp-action@v1.2.0
+                uses: appleboy/scp-action@v0.1.7
                 with:
                     host: ${{ secrets.SSH_HOST }}
                     username: ${{ secrets.SSH_USERNAME }}
