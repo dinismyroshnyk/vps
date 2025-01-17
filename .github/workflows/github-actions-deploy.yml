@@ -51,4 +51,4 @@ jobs:
                             echo "Build failed! Not applying changes."
                             exit 1
                         fi
-                    timeout: 600s
+                    timeout: 300s
