@@ -1,0 +1,54 @@
+name: Deploy NixOS configuration
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: "Get latest NixOS configuration"
+                uses: actions/checkout@v4
+
+            -   name: "Clean '/build' directory on remote"
+                uses: appleboy/ssh-action@v1.2.0
+                with:
+                    host: ${{ secrets.SSH_HOST }}
+                    username: ${{ secrets.SSH_USERNAME }}
+                    key: ${{ secrets.SSH_KEY }}
+                    script: |
+                        rm -rf /build/*
+                        mkdir -p /build
+
+            -   name: "Deploy NixOS configuration to remote"
+                uses: appleboy/scp-action@v1.2.0
+                with:
+                    host: ${{ secrets.SSH_HOST }}
+                    username: ${{ secrets.SSH_USERNAME }}
+                    key: ${{ secrets.SSH_KEY }}
+                    source: "."
+                    target: "/build"
+                    timeout: 60s
+
+            -   name: "Validate and apply NixOS configuration"
+                uses: appleboy/ssh-action@v1.2.0
+                with:
+                    host: ${{ secrets.SSH_HOST }}
+                    username: ${{ secrets.SSH_USERNAME }}
+                    key: ${{ secrets.SSH_KEY }}
+                    script: |
+                        cd /build
+                        # Backup current generation
+                        nix-env --backup-all --profile /nix/var/nix/profiles/system
+                        # Test build first
+                        nixos-rebuild build --flake .#ampere-config
+                        if [ $? -eq 0 ]; then
+                            nixos-rebuild switch --flake .#ampere-config
+                        else
+                            echo "Build failed! Not applying changes."
+                            exit 1
+                        fi
+                    timeout: 600s
