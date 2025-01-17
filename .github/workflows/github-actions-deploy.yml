@@ -22,6 +22,7 @@ jobs:
                     script: |
                         rm -rf /build/*
                         mkdir -p /build
+                        chown $USER:$USER /build
 
             -   name: "Deploy NixOS configuration to remote"
                 uses: appleboy/scp-action@v0.1.7
